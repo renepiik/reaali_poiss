@@ -7,11 +7,6 @@ import 'package:http/http.dart' as http;
 import 'package:reaali_poiss/json_parsing.dart';
 import 'package:flutter/material.dart';
 
-enum StoriesType {
-  newStories,
-  editionStories
-}
-
 class InheritedBloc extends InheritedWidget {
   final RPBloc bloc;
 
@@ -24,44 +19,44 @@ class InheritedBloc extends InheritedWidget {
 }
 
 class RPBloc {
-  final _articleSubject = BehaviorSubject<UnmodifiableListView<Article>>();
-  final _storiesTypeController = StreamController<StoriesType>();
+  // frontpage articles stream
+  final _frontpageSubject = BehaviorSubject<UnmodifiableListView<Article>>();
+  var _frontpageArticles = <Article>[];
+  Stream<UnmodifiableListView<Article>> get frontpageArticles => _frontpageSubject.stream;
 
-  Sink<StoriesType> get storiesType => _storiesTypeController.sink;
-  Stream<UnmodifiableListView<Article>> get articles => _articleSubject.stream;
+  // edition articles stream
+  final _editionSubject = BehaviorSubject<UnmodifiableListView<Article>>();
+  var _editionArticles = <Article>[];
+  Stream<UnmodifiableListView<Article>> get editionArticles => _editionSubject.stream;
 
-  var _articles = <Article>[];
+  final _editionIdController = StreamController<int>();
+  Sink<int> get editionId => _editionIdController.sink;
 
   RPBloc() {
-    _storiesTypeController.stream.listen((storiesType) {
-      if (storiesType == StoriesType.newStories) {
-        _getArticlesAndUpdate(StoriesType.newStories);
-      } else {
-        _getArticlesAndUpdate(StoriesType.editionStories, editionId: 157);
-      }
+    _getFrontpageArticles().then((_) {
+      _frontpageSubject.add(UnmodifiableListView(_frontpageArticles));
+    });
+
+    _editionIdController.stream.listen((editionId) {
+      _getEditionArticles(editionId).then((_) {
+        _editionSubject.add(UnmodifiableListView(_editionArticles));
+      });
     });
   }
 
-  _getArticlesAndUpdate(StoriesType storiesType, {int editionId}) async {
-    List<int> ids;
-    if (storiesType == StoriesType.newStories) {
-      ids = await fetchLatestIds();
-      _getArticles(ids).then((_) {
-        _articleSubject.add(UnmodifiableListView(_articles));
-      });
-    } else {
-      ids = await fetchEditionIds(editionId);
-      _getArticles(ids).then((_) {
-        _articleSubject.add(UnmodifiableListView(_articles));
-      });
-    }
-  }
-
   // returns articles of given list of ids
-  Future<Null> _getArticles(List<int> _ids) async {
+  Future<Null> _getFrontpageArticles() async {
+    List<int> _ids = await fetchLatestIds();
     final futureArticles = _ids.map((id) => _getArticle(id));
     final articles = await Future.wait(futureArticles);
-    _articles =  articles;
+    _frontpageArticles =  articles;
+  }
+
+  Future<Null> _getEditionArticles(int editionId) async {
+    List<int> _ids = await fetchEditionIds(editionId);
+    final futureArticles = _ids.map((id) => _getArticle(id));
+    final articles = await Future.wait(futureArticles);
+    _editionArticles =  articles;
   }
 
   // returns article of given id

@@ -3,7 +3,7 @@ import 'topics_list_widget.dart';
 import 'featured_edition_widget.dart';
 import 'package:flutter/services.dart';
 import 'src/rp_bloc.dart';
-import 'stories_list_widget.dart';
+import 'frontpage_stories_widget.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,18 +18,18 @@ class MyApp extends StatelessWidget {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
       systemNavigationBarColor: Colors.grey[50],
     ));
-    return MaterialApp(
-      title: 'Reaali Poiss',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        primaryColor: Colors.grey[50],
-        fontFamily: 'Montserrat'
+    return InheritedBloc(
+      bloc: RPBloc(),
+      child: MaterialApp(
+        title: 'Reaali Poiss',
+        theme: ThemeData(
+          primarySwatch: Colors.grey,
+          primaryColor: Colors.grey[50],
+          fontFamily: 'Montserrat'
+        ),
+        home: MyHomePage(title: 'Reaali Poiss'),
+        debugShowCheckedModeBanner: false,
       ),
-      home: InheritedBloc(
-        child: MyHomePage(title: 'Reaali Poiss'),
-        bloc: RPBloc(),
-      ),
-      debugShowCheckedModeBanner: false,
     );
   }
 }
@@ -47,8 +47,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = InheritedBloc.of(context).bloc;
-
     return Scaffold(
       drawer: Drawer(
         child: ListView(
@@ -88,13 +86,13 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: RefreshIndicator(
         onRefresh: () async {
-          bloc.storiesType.add(StoriesType.newStories);
+          await Future.delayed(Duration(seconds: 2));
         },
         child: ListView(
           children: <Widget>[
             FeaturedEditionWidget(),
             TopicsListWidget(),
-            StoriesListWidget(storiesType: StoriesType.newStories,),
+            FrontpageStoriesWidget(),
             Container(
               height: 16.0,
             ),

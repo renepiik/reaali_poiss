@@ -14,7 +14,7 @@ class EditionWidget extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => EditionView(editionMonth)),
+          MaterialPageRoute(builder: (context) => EditionView(editionMonth, editionId)),
         );
       },
       child: Column(

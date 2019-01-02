@@ -5,18 +5,18 @@ import 'package:reaali_poiss/src/rp_bloc.dart';
 import 'styles.dart';
 import 'article_view.dart';
 
-class StoriesListWidget extends StatelessWidget {
-  final StoriesType storiesType;
+class EditionStoriesWidget extends StatelessWidget {
+  final int editionId;
 
-  StoriesListWidget({@required this.storiesType});
+  EditionStoriesWidget({this.editionId});
 
   @override
   Widget build(BuildContext context) {
     final bloc = InheritedBloc.of(context).bloc;
-    bloc.storiesType.add(storiesType);
+    bloc.editionId.add(editionId);
 
     return StreamBuilder<UnmodifiableListView<Article>>(
-      stream: bloc.articles,
+      stream: bloc.editionArticles,
       initialData: UnmodifiableListView<Article>([]),
       builder: (context, snapshot) {
         return Column(
@@ -63,4 +63,3 @@ class StoriesListWidget extends StatelessWidget {
     );
   }
 }
-

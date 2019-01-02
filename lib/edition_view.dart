@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-import 'stories_list_widget.dart';
-import 'package:reaali_poiss/src/rp_bloc.dart';
+import 'edition_stories_widget.dart';
 
 class EditionView extends StatelessWidget {
-  EditionView(this.edition);
+  EditionView(this.edition, this.editionId);
 
   final String edition;
+  final int editionId;
 
   @override
   Widget build(BuildContext context) {
-    //final bloc = InheritedBloc.of(context).bloc;
-    //bloc.storiesType.add(StoriesType.editionStories);
 
     return Scaffold(
       appBar: AppBar(
@@ -22,8 +20,10 @@ class EditionView extends StatelessWidget {
           ),
         ],
       ),
-      body: StoriesListWidget(
-        storiesType: StoriesType.editionStories,
+      body: ListView(
+        children: <Widget>[
+          EditionStoriesWidget(editionId: editionId,),
+        ],
       ),
     );
   }
