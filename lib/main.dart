@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Reaali Poiss',
       theme: ThemeData(
-        primarySwatch: Colors.grey,
+        primarySwatch: Colors.blue,
         primaryColor: Colors.grey[50],
         fontFamily: 'Montserrat'
       ),
