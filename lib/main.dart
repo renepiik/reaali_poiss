@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'featured_edition_widget.dart';
 import 'package:flutter/services.dart';
-import 'src/rp_bloc.dart';
-import 'frontpage_stories_widget.dart';
-import 'styles.dart';
-import 'chips_widget.dart';
-import 'all_editions_view.dart';
-import 'settings_screen.dart';
+import 'package:reaali_poiss/src/rp_bloc.dart';
+import 'package:reaali_poiss/frontpage_stories_widget.dart';
+import 'package:reaali_poiss/styles.dart';
+import 'package:reaali_poiss/chips_widget.dart';
+import 'package:reaali_poiss/screens/all_editions_view.dart';
+import 'package:reaali_poiss/screens/settings_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -33,8 +33,11 @@ class MyApp extends StatelessWidget {
           primaryColor: Colors.grey[50],
           fontFamily: 'Merriweather'
         ),
-        home: MyHomePage(title: 'Reaali Poiss'),
         debugShowCheckedModeBanner: false,
+        initialRoute: '/',
+        routes: {
+          '/': (context) => MyHomePage(title: 'Reaali Poiss'),
+        },
       ),
     );
   }

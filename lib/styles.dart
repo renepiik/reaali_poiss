@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 TextStyle h1Headline = TextStyle(
   fontFamily: 'Merriweather',
-  fontSize: 40.0,
+  fontSize: 36.0,
   fontWeight: FontWeight.w800,
   fontStyle: FontStyle.italic,
   //decoration: TextDecoration.underline,

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'edition_stories_widget.dart';
-import 'styles.dart';
+import 'package:reaali_poiss/edition_stories_widget.dart';
+import 'package:reaali_poiss/styles.dart';
+
+// TODO: implement custom sliverview
 
 class EditionView extends StatelessWidget {
   EditionView(this.editionMonth, this.editionId);

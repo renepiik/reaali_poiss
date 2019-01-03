@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'topic_view.dart';
+import 'package:reaali_poiss/screens/topic_view.dart';
 
 List<String> teemad = [
   'Veerg',

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'edition_widget.dart';
+import 'package:reaali_poiss/edition_widget.dart';
 
 class AllEditionsView extends StatelessWidget {
   @override

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:reaali_poiss/src/article.dart';
 import 'dart:collection';
 import 'package:reaali_poiss/src/rp_bloc.dart';
-import 'styles.dart';
-import 'article_view.dart';
+import 'package:reaali_poiss/styles.dart';
+import 'package:reaali_poiss/screens/article_view.dart';
 
 class EditionStoriesWidget extends StatelessWidget {
   final int editionId;
@@ -56,9 +56,9 @@ class EditionStoriesWidget extends StatelessWidget {
                 ),
               ),
               Container(
-                margin: EdgeInsets.fromLTRB(20, 8, 12, 8),
-                height: 90.0,
-                width: 90.0,
+                margin: EdgeInsets.fromLTRB(20, 8, 12, 8).add(EdgeInsets.all(5)),
+                height: 80.0,
+                width: 80.0,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(0),
                   image: DecorationImage(

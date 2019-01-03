@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:reaali_poiss/src/article.dart';
 import 'dart:collection';
 import 'package:reaali_poiss/src/rp_bloc.dart';
-import 'styles.dart';
-import 'article_view.dart';
+import 'package:reaali_poiss/styles.dart';
+import 'package:reaali_poiss/screens/article_view.dart';
 
 class FrontpageStoriesWidget extends StatelessWidget {
   @override

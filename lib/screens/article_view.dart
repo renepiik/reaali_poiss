@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'styles.dart';
-import 'src/article.dart';
+import 'package:reaali_poiss/styles.dart';
+import 'package:reaali_poiss/src/article.dart';
 
 class ArticleView extends StatefulWidget {
   final Article article;
@@ -35,7 +35,7 @@ class _ArticleViewState extends State<ArticleView> {
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
-            title: Text('Reaali Poiss'),
+            title: Text(''),
             pinned: true,
             expandedHeight: 250.0,
             flexibleSpace: FlexibleSpaceBar(
