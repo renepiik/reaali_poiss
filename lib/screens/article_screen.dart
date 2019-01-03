@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:reaali_poiss/styles.dart';
 import 'package:reaali_poiss/src/article.dart';
 
-class ArticleView extends StatefulWidget {
+class ArticleScreen extends StatefulWidget {
   final Article article;
 
-  const ArticleView({Key key, this.article}) : super(key: key);
+  const ArticleScreen({Key key, @required this.article}) : super(key: key);
 
   @override
-  _ArticleViewState createState() => _ArticleViewState();
+  _ArticleScreenState createState() => _ArticleScreenState();
 }
 
-class _ArticleViewState extends State<ArticleView> {
+class _ArticleScreenState extends State<ArticleScreen> {
   String time;
 
   @override

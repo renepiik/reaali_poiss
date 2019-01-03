@@ -2,18 +2,19 @@ import 'package:flutter/material.dart';
 import 'featured_edition_widget.dart';
 import 'package:flutter/services.dart';
 import 'package:reaali_poiss/src/rp_bloc.dart';
+import 'package:reaali_poiss/src/article.dart';
 import 'package:reaali_poiss/frontpage_stories_widget.dart';
 import 'package:reaali_poiss/styles.dart';
 import 'package:reaali_poiss/chips_widget.dart';
-import 'package:reaali_poiss/screens/all_editions_view.dart';
+import 'package:reaali_poiss/screens/editions_screen.dart';
 import 'package:reaali_poiss/screens/settings_screen.dart';
+import 'package:reaali_poiss/screens/article_screen.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-
   MyApp({Key key}) : super(key: key);
 
   @override
@@ -24,20 +25,17 @@ class MyApp extends StatelessWidget {
       statusBarIconBrightness: Brightness.dark,
       //statusBarColor: Colors.grey[50],
     ));
+
     return InheritedBloc(
       bloc: RPBloc(),
       child: MaterialApp(
         title: 'Reaali Poiss',
         theme: ThemeData(
-          primarySwatch: Colors.grey,
-          primaryColor: Colors.grey[50],
-          fontFamily: 'Merriweather'
-        ),
+            primarySwatch: Colors.grey,
+            primaryColor: Colors.grey[50],
+            fontFamily: 'Merriweather'),
         debugShowCheckedModeBanner: false,
-        initialRoute: '/',
-        routes: {
-          '/': (context) => MyHomePage(title: 'Reaali Poiss'),
-        },
+        home: MyHomePage(title: 'Reaali Poiss'),
       ),
     );
   }
@@ -53,7 +51,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   @override
   Widget build(BuildContext context) {
     final bloc = InheritedBloc.of(context).bloc;
@@ -82,7 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.pop(context);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => AllEditionsView()),
+                  MaterialPageRoute(builder: (context) => EditionsScreen()),
                 );
               },
             ),
@@ -103,45 +100,54 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      appBar: AppBar(
-        title: Text(
-          'Reaali Poiss',
-          style: h3Headline,
-        ),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () {},
-          ),
-        ],
-      ),
       body: Builder(
         builder: (BuildContext context) {
           return RefreshIndicator(
-            onRefresh: () async {
-              bloc.frontpageRefresh.add(true);
+              onRefresh: () async {
+                bloc.frontpageRefresh.add(true);
 
-              await for (bool value in bloc.isLoading) {
-                if (!value) {
-                  return Scaffold.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('Uuendatud'),
-                      duration: Duration(seconds: 1),
-                    ),
-                  );
+                await for (bool value in bloc.isLoading) {
+                  if (!value) {
+                    return Scaffold.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Uuendatud'),
+                        duration: Duration(seconds: 1),
+                      ),
+                    );
+                  }
                 }
-              }
-            },
-            child: ListView(
-              children: <Widget>[
-                ChipsWidget(),
-                FeaturedEditionWidget(),
-                Container(height: 12,),
-                FrontpageStoriesWidget(),
-                Container(height: 16.0,),
-              ],
-            ),
-          );
+              },
+              child: CustomScrollView(
+                slivers: <Widget>[
+                  SliverAppBar(
+                    title: Text(
+                      'Reaali Poiss',
+                      style: h3Headline,
+                    ),
+                    actions: <Widget>[
+                      IconButton(
+                        icon: Icon(Icons.search),
+                        onPressed: () {},
+                      ),
+                    ],
+                    floating: true,
+                    snap: true,
+                  ),
+                  SliverList(
+                    delegate: SliverChildListDelegate(<Widget>[
+                      ChipsWidget(),
+                      FeaturedEditionWidget(),
+                      Container(
+                        height: 12,
+                      ),
+                      FrontpageStoriesWidget(),
+                      Container(
+                        height: 16.0,
+                      ),
+                    ]),
+                  ),
+                ],
+              ));
         },
       ),
     );

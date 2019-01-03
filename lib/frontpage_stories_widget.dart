@@ -3,7 +3,7 @@ import 'package:reaali_poiss/src/article.dart';
 import 'dart:collection';
 import 'package:reaali_poiss/src/rp_bloc.dart';
 import 'package:reaali_poiss/styles.dart';
-import 'package:reaali_poiss/screens/article_view.dart';
+import 'package:reaali_poiss/screens/article_screen.dart';
 
 class FrontpageStoriesWidget extends StatelessWidget {
   @override
@@ -36,7 +36,9 @@ class FrontpageStoriesWidget extends StatelessWidget {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => ArticleView(article: article)));
+                    builder: (context) => ArticleScreen(
+                          article: article,
+                        )));
           },
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,7 +53,8 @@ class FrontpageStoriesWidget extends StatelessWidget {
                 ),
               ),
               Container(
-                margin: EdgeInsets.fromLTRB(20, 8, 12, 8).add(EdgeInsets.all(5)),
+                margin:
+                    EdgeInsets.fromLTRB(20, 8, 12, 8).add(EdgeInsets.symmetric(vertical: 10, horizontal: 5)),
                 height: 80.0,
                 width: 80.0,
                 decoration: BoxDecoration(

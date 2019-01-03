@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'edition_widget.dart';
-//import 'all_editions_view.dart';
+//import 'editions_screen.dart';
 
 class FeaturedEditionWidget extends StatelessWidget {
   @override

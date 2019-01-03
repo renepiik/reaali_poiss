@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:reaali_poiss/edition_widget.dart';
 
-class AllEditionsView extends StatelessWidget {
+class EditionsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

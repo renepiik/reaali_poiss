@@ -3,7 +3,7 @@ import 'package:reaali_poiss/src/article.dart';
 import 'dart:collection';
 import 'package:reaali_poiss/src/rp_bloc.dart';
 import 'package:reaali_poiss/styles.dart';
-import 'package:reaali_poiss/screens/article_view.dart';
+import 'package:reaali_poiss/screens/article_screen.dart';
 
 class EditionStoriesWidget extends StatelessWidget {
   final int editionId;
@@ -41,7 +41,7 @@ class EditionStoriesWidget extends StatelessWidget {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => ArticleView(article: article)));
+                    builder: (context) => ArticleScreen(article: article)));
           },
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -56,7 +56,8 @@ class EditionStoriesWidget extends StatelessWidget {
                 ),
               ),
               Container(
-                margin: EdgeInsets.fromLTRB(20, 8, 12, 8).add(EdgeInsets.all(5)),
+                margin:
+                    EdgeInsets.fromLTRB(20, 8, 12, 8).add(EdgeInsets.all(5)),
                 height: 80.0,
                 width: 80.0,
                 decoration: BoxDecoration(

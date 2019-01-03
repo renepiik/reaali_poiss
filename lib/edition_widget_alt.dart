@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:reaali_poiss/screens/edition_view.dart';
+import 'package:reaali_poiss/screens/edition_screen.dart';
 import 'styles.dart';
 
 class EditionWidget extends StatelessWidget {
@@ -18,7 +18,7 @@ class EditionWidget extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => EditionView(editionMonth, editionId)),
+                builder: (context) => EditionScreen(editionMonth, editionId)),
           );
         },
         child: Column(

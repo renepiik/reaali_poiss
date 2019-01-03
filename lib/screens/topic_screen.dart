@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class TopicView extends StatelessWidget {
-  TopicView(this.topic);
+class TopicScreen extends StatelessWidget {
+  TopicScreen(this.topic);
 
   final String topic;
 

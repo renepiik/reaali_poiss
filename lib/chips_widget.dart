@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:reaali_poiss/screens/topic_view.dart';
+import 'package:reaali_poiss/screens/topic_screen.dart';
 
 List<String> teemad = [
   'Veerg',
@@ -29,7 +29,7 @@ class ChipsWidget extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => TopicView(teemad[position])));
+                        builder: (context) => TopicScreen(teemad[position])));
               },
               label: Text('#' + teemad[position]),
               padding: EdgeInsets.all(6),
