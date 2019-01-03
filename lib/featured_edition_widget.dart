@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'edition_widget.dart';
-import 'all_editions_view.dart';
+//import 'all_editions_view.dart';
 
 class FeaturedEditionWidget extends StatelessWidget {
   @override
@@ -9,6 +9,7 @@ class FeaturedEditionWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.end,
       children: <Widget>[
         EditionWidget(editionMonth: 'Detsember', editionId: 157,),
+        /*
         Container(
           margin: EdgeInsets.fromLTRB(20, 0, 20, 30),
           child: InkWell(
@@ -36,6 +37,7 @@ class FeaturedEditionWidget extends StatelessWidget {
             ),
           ),
         ),
+        */
       ],
     );
   }

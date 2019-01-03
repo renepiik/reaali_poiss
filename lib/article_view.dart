@@ -2,20 +2,33 @@ import 'package:flutter/material.dart';
 import 'styles.dart';
 import 'src/article.dart';
 
-class ArticleView extends StatelessWidget {
+class ArticleView extends StatefulWidget {
   final Article article;
-  String time;
 
-  ArticleView({@required this.article});
+  const ArticleView({Key key, this.article}) : super(key: key);
+
+  @override
+  _ArticleViewState createState() => _ArticleViewState();
+}
+
+class _ArticleViewState extends State<ArticleView> {
+  String time;
 
   @override
   Widget build(BuildContext context) {
-    if (article.timestamp.day == DateTime.now().day) {
+    final timestamp = widget.article.timestamp;
+
+    if (timestamp.day == DateTime.now().day) {
       time = 'Täna';
-    } else if (article.timestamp.day == DateTime.now().subtract(Duration(days: 1)).day) {
+    } else if (timestamp.day ==
+        DateTime.now().subtract(Duration(days: 1)).day) {
       time = 'Eile';
     } else {
-      time = article.timestamp.day.toString() + '.' + article.timestamp.month.toString() + '.' + article.timestamp.year.toString();
+      time = timestamp.day.toString() +
+          '.' +
+          timestamp.month.toString() +
+          '.' +
+          timestamp.year.toString();
     }
 
     return Scaffold(
@@ -27,9 +40,7 @@ class ArticleView extends StatelessWidget {
             expandedHeight: 250.0,
             flexibleSpace: FlexibleSpaceBar(
               background: Image(
-                  image: AssetImage('images/pilt2.jpg'),
-                  fit: BoxFit.cover
-              ),
+                  image: AssetImage('images/pilt2.jpg'), fit: BoxFit.cover),
             ),
             actions: <Widget>[
               IconButton(
@@ -43,52 +54,64 @@ class ArticleView extends StatelessWidget {
               <Widget>[
                 Padding(
                   padding: EdgeInsets.fromLTRB(20, 20, 20, 8),
-                  child: Text(
-                    article.title,
-                    style: primaryHeading,
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(20, 8, 20, 8),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Text(
-                        article.topic.toUpperCase(),
-                        style: TextStyle(
-                            fontSize: 18.0
-                        ),
+                        widget.article.topic.toUpperCase(),
+                        style: topicText,
                       ),
                       Text(
                         time,
-                        style: TextStyle(
-                            fontSize: 18.0
+                        style: topicText.apply(color: Colors.grey[600]),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(20, 16, 20, 8),
+                  child: Text(
+                    widget.article.title,
+                    style: h2Headline,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(20, 20, 20, 8),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      Container(
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: NetworkImage('https://amp.businessinsider.com/images/5899ffcf6e09a897008b5c04-750-750.jpg'),
+                          ),
+                          borderRadius: BorderRadius.circular(50),
+                          color: Colors.grey[300],
+                        ),
+                        height: 60,
+                        width: 60,
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(left: 25),
+                        child: Text(
+                          widget.article.author,
+                          style: authorText,
                         ),
                       ),
                     ],
                   ),
                 ),
-                Column(
-                  children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(20, 20, 20, 8),
-                      child: Text(
-                        article.text,
-                        style: bodyText,
-                      ),
-                    ),
-                  ],
-                ),
                 Padding(
-                  padding: EdgeInsets.fromLTRB(20, 16, 20, 20),
+                  padding: EdgeInsets.fromLTRB(20, 20, 20, 8),
                   child: Text(
-                    'Autor: '+article.author,
-                    style: bodyText.apply(fontWeightDelta: 3),
+                    widget.article.text,
+                    style: bodyText,
                   ),
                 ),
-                ],
-              ),
+                Container(height: 20,)
+              ],
             ),
+          ),
         ],
       ),
     );

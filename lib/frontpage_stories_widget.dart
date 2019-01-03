@@ -6,7 +6,6 @@ import 'styles.dart';
 import 'article_view.dart';
 
 class FrontpageStoriesWidget extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     final bloc = InheritedBloc.of(context).bloc;
@@ -16,47 +15,57 @@ class FrontpageStoriesWidget extends StatelessWidget {
       initialData: UnmodifiableListView<Article>([]),
       builder: (context, snapshot) {
         return Column(
-          children: snapshot.data.map((article) => _storyWidget(context, article)).toList(),
+          children: snapshot.data
+              .map((article) => _storyWidget(context, article))
+              .toList(),
         );
       },
     );
   }
 
   Widget _storyWidget(BuildContext context, Article article) {
-    return InkWell(
-      onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => ArticleView(article: article))
-        );
-      },
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Container(
-            margin: EdgeInsets.fromLTRB(16, 8, 20, 8),
-            height: 90.0,
-            width: 90.0,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.0),
-              image: DecorationImage(
-                image: AssetImage('images/pilt2.jpg'),
-                fit: BoxFit.cover,
+    return Column(
+      children: <Widget>[
+        Container(
+          height: 1,
+          color: Colors.grey[200],
+          width: MediaQuery.of(context).size.width * 0.96,
+        ),
+        InkWell(
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ArticleView(article: article)));
+          },
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Expanded(
+                child: Container(
+                  margin: EdgeInsets.fromLTRB(16, 8, 16, 8),
+                  child: Text(
+                    article.title,
+                    style: h4Headline,
+                  ),
+                ),
               ),
-            ),
-          ),
-          Expanded(
-            child: Container(
-              margin: EdgeInsets.symmetric(vertical: 8.0),
-              child: Text(
-                article.title,
-                style: secondaryHeading,
+              Container(
+                margin: EdgeInsets.fromLTRB(20, 8, 12, 8).add(EdgeInsets.all(5)),
+                height: 80.0,
+                width: 80.0,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(0),
+                  image: DecorationImage(
+                    image: AssetImage('images/pilt2.jpg'),
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ),
-            ),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
-

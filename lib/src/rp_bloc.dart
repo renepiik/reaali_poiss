@@ -19,40 +19,71 @@ class InheritedBloc extends InheritedWidget {
 }
 
 class RPBloc {
+  // isLoading stream
+  final _isLoadingSubject = BehaviorSubject<bool>();
+  Stream<bool> get isLoading => _isLoadingSubject.stream;
+
   // frontpage articles stream
   final _frontpageSubject = BehaviorSubject<UnmodifiableListView<Article>>();
   var _frontpageArticles = <Article>[];
   Stream<UnmodifiableListView<Article>> get frontpageArticles => _frontpageSubject.stream;
+
+  // refresh frontpage sink
+  final _frontpageRefreshController = StreamController<bool>();
+  Sink<bool> get frontpageRefresh => _frontpageRefreshController.sink;
 
   // edition articles stream
   final _editionSubject = BehaviorSubject<UnmodifiableListView<Article>>();
   var _editionArticles = <Article>[];
   Stream<UnmodifiableListView<Article>> get editionArticles => _editionSubject.stream;
 
+  // edition id sink
   final _editionIdController = StreamController<int>();
   Sink<int> get editionId => _editionIdController.sink;
+  
+  void dispose() { 
+    _editionIdController.close();
+    _frontpageRefreshController.close();
+  }
 
   RPBloc() {
-    _getFrontpageArticles().then((_) {
-      _frontpageSubject.add(UnmodifiableListView(_frontpageArticles));
+    frontpage() {
+      _getFrontpageArticles().then((_) {
+        _frontpageSubject.add(UnmodifiableListView(_frontpageArticles));
+        _isLoadingSubject.add(false);
+      });
+    }
+
+    frontpage();
+    _frontpageRefreshController.stream.listen((frontpageRefresh) {
+      frontpage();
     });
 
     _editionIdController.stream.listen((editionId) {
-      _getEditionArticles(editionId).then((_) {
-        _editionSubject.add(UnmodifiableListView(_editionArticles));
-      });
+      try {
+        _getEditionArticles(editionId).then((_) {
+          _editionSubject.add(UnmodifiableListView(_editionArticles));
+          _isLoadingSubject.add(false);
+        });
+      } catch (e) {
+        _editionSubject.add(UnmodifiableListView([]));
+        _isLoadingSubject.add(false);
+      }
     });
   }
 
-  // returns articles of given list of ids
+  // returns frontpage articles
   Future<Null> _getFrontpageArticles() async {
+    _isLoadingSubject.add(true);
     List<int> _ids = await fetchLatestIds();
     final futureArticles = _ids.map((id) => _getArticle(id));
     final articles = await Future.wait(futureArticles);
-    _frontpageArticles =  articles;
+    _frontpageArticles = articles;
   }
 
+  // returns articles of given list of ids
   Future<Null> _getEditionArticles(int editionId) async {
+    _isLoadingSubject.add(true);
     List<int> _ids = await fetchEditionIds(editionId);
     final futureArticles = _ids.map((id) => _getArticle(id));
     final articles = await Future.wait(futureArticles);
@@ -109,7 +140,7 @@ class RPBloc {
 
       return editionIds;
     } else {
-      throw Exception('Failed to load');
+      return <int>[];
     }
   }
 }

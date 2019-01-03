@@ -10,38 +10,52 @@ class EditionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => EditionView(editionMonth, editionId)),
-        );
-      },
-      child: Column(
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Container(
+    return Card(
+      clipBehavior: Clip.antiAlias,
+      margin: EdgeInsets.fromLTRB(12, 0, 12, 12),
+      child: InkWell(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => EditionView(editionMonth, editionId)),
+          );
+        },
+        child: Column(
+          children: <Widget>[
+            Container(
+              //margin: EdgeInsets.fromLTRB(12, 0, 12, 12),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.0),
+                borderRadius: BorderRadius.circular(0),
                 image: DecorationImage(
                   image: AssetImage('images/pilt3.jpg'),
                   fit: BoxFit.cover,
                 ),
+                color: Colors.grey[300],
               ),
-              height: 250.0,
               width: double.infinity,
+              height: 250.0,
             ),
-          ),
-          Container(
-            margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
-            child: Text(
-              editionMonth+' '+editionId.toString(),
-              style: primaryHeading,
+            Stack(
+              alignment: Alignment(-0.6, 0.3),
+              children: <Widget>[
+                Container(
+                  color: Colors.lightBlue[100],
+                  height: 10,
+                  width: MediaQuery.of(context).size.width * 0.72,
+                ),
+                Container(
+                  margin: EdgeInsets.fromLTRB(20, 8, 20, 20),
+                  child: Text(
+                    editionMonth + ' $editionId',
+                    style: h1Headline,
+                  ),
+                  alignment: Alignment(-0.8, 0),
+                ),
+              ],
             ),
-            width: double.infinity,
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
