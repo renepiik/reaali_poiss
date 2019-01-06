@@ -24,51 +24,45 @@ class FrontpageStoriesWidget extends StatelessWidget {
   }
 
   Widget _storyWidget(BuildContext context, Article article) {
-    return Column(
-      children: <Widget>[
-        Container(
-          height: 1,
-          color: Colors.grey[200],
-          width: MediaQuery.of(context).size.width * 0.96,
-        ),
-        InkWell(
-          onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => ArticleScreen(
-                          article: article,
-                        )));
-          },
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Expanded(
-                child: Container(
-                  margin: EdgeInsets.fromLTRB(16, 8, 16, 8),
-                  child: Text(
-                    article.title,
-                    style: h4Headline,
-                  ),
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 8),
+      child: InkWell(
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ArticleScreen(
+                        article: article,
+                      )));
+        },
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Expanded(
+              child: Container(
+                margin: EdgeInsets.fromLTRB(16, 8, 16, 8),
+                child: Text(
+                  article.title,
+                  style: h4Headline,
                 ),
               ),
-              Container(
-                margin:
-                    EdgeInsets.fromLTRB(20, 8, 12, 8).add(EdgeInsets.symmetric(vertical: 10, horizontal: 5)),
-                height: 80.0,
-                width: 80.0,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(0),
-                  image: DecorationImage(
-                    image: AssetImage('images/pilt2.jpg'),
-                    fit: BoxFit.cover,
-                  ),
+            ),
+            Container(
+              margin: EdgeInsets.fromLTRB(20, 8, 12, 8)
+                  .add(EdgeInsets.symmetric(vertical: 10, horizontal: 5)),
+              height: 85.0,
+              width: 85.0,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                image: DecorationImage(
+                  image: AssetImage('images/pilt2.jpg'),
+                  fit: BoxFit.cover,
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
 }

@@ -36,10 +36,10 @@ TextStyle authorText = TextStyle(
 );
 
 TextStyle bodyText = TextStyle(
-  fontFamily: 'Merriweather',
+  fontFamily: 'Open Sans',
   fontSize: 18,
-  height: 1.3,
-  fontWeight: FontWeight.w400,
+  height: 1.1,
+  fontWeight: FontWeight.w500,
   color: Colors.grey[800],
 );
 
@@ -47,6 +47,14 @@ TextStyle drawerText = TextStyle(
   fontFamily: 'Libre Franklin',
   fontSize: 16,
   fontWeight: FontWeight.w500,
+);
+
+TextStyle quoteText = TextStyle(
+  fontFamily: 'Merriweather',
+  fontSize: 16,
+  fontWeight: FontWeight.w500,
+  fontStyle: FontStyle.italic,
+  color: Colors.grey[800]
 );
 
 TextStyle topicText = TextStyle(

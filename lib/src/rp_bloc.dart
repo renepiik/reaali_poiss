@@ -19,6 +19,9 @@ class InheritedBloc extends InheritedWidget {
 }
 
 class RPBloc {
+  // for caching articles while app is running
+  HashMap<int, Article> _cachedArticles;
+
   // isLoading stream
   final _isLoadingSubject = BehaviorSubject<bool>();
   Stream<bool> get isLoading => _isLoadingSubject.stream;
@@ -47,6 +50,8 @@ class RPBloc {
   }
 
   RPBloc() {
+    _cachedArticles = HashMap<int, Article>();
+
     frontpage() {
       _getFrontpageArticles().then((_) {
         _frontpageSubject.add(UnmodifiableListView(_frontpageArticles));
@@ -92,16 +97,20 @@ class RPBloc {
 
   // returns article of given id
   Future<Article> _getArticle(int id) async {
-    final url = 'http://rene.piik.eu/api/article/read_one.php?id='+id.toString();
-    final res = await http.get(url);
+    if (!_cachedArticles.containsKey(id)) {
+      final url = 'http://rene.piik.eu/api/article/read_one.php?id='+id.toString();
+      final res = await http.get(url);
 
-    if (res.statusCode == 200) {
-      // if server returns OK response
-      return parseArticle(res.body);
+      if (res.statusCode == 200) {
+        // if server returns OK response
+        _cachedArticles[id] = parseArticle(res.body);
 
-    } else {
-      throw Exception('Failed to load');
+      } else {
+        throw Exception('Failed to load');
+      }
     }
+
+    return _cachedArticles[id];
   }
 
   // returns list of all articles in order of latest -> oldest

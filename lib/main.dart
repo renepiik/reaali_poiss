@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'featured_edition_widget.dart';
 import 'package:flutter/services.dart';
 import 'package:reaali_poiss/src/rp_bloc.dart';
-import 'package:reaali_poiss/src/article.dart';
 import 'package:reaali_poiss/frontpage_stories_widget.dart';
 import 'package:reaali_poiss/styles.dart';
 import 'package:reaali_poiss/chips_widget.dart';
 import 'package:reaali_poiss/screens/editions_screen.dart';
 import 'package:reaali_poiss/screens/settings_screen.dart';
-import 'package:reaali_poiss/screens/article_screen.dart';
+import 'package:reaali_poiss/quote_widget.dart';
 
 void main() {
   runApp(MyApp());
@@ -130,15 +129,17 @@ class _MyHomePageState extends State<MyHomePage> {
                         onPressed: () {},
                       ),
                     ],
-                    floating: true,
-                    snap: true,
+                    pinned: true,
+                    elevation: 3,
                   ),
                   SliverList(
                     delegate: SliverChildListDelegate(<Widget>[
-                      ChipsWidget(),
-                      FeaturedEditionWidget(),
                       Container(
-                        height: 12,
+                        height: 20,
+                      ),
+                      FeaturedEditionWidget(editionId: 157, editionMonth: 'Detsember',),
+                      Container(
+                        height: 100,
                       ),
                       FrontpageStoriesWidget(),
                       Container(
