@@ -29,12 +29,12 @@ class EditionWidget extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
               color: Colors.grey[300],
-              boxShadow: [BoxShadow(
+              /*boxShadow: [BoxShadow(
                 spreadRadius: 5,
                 color: Colors.grey[400],
                 blurRadius: 15,
                 offset: Offset(5, 5),
-              )],
+              )],*/
             ),
             width: MediaQuery.of(context).size.width * 0.9,
             height: MediaQuery.of(context).size.width * 0.5,

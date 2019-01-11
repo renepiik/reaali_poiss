@@ -22,11 +22,22 @@ dependencies:
   http: ^0.12.0
   built_value: ^6.2.0
   rxdart: ^0.20.0
+  shared_preferences: ^0.4.3
+  font_awesome_flutter: ^8.2.0
+  rounded_modal: ^1.0.0
 
 dev_dependencies:
+  flutter_launcher_icons: "^0.7.0"
+
   flutter_test:
     sdk: flutter
 
+flutter_icons:
+  image_path: "assets/images/icon.png"
+  android: true
+  ios: true
+  adaptive_icon_foreground: "assets/images/icon.png"
+  adaptive_icon_background: "#ffffff"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec
@@ -40,44 +51,44 @@ flutter:
   uses-material-design: true
 
   assets:
-    - images/pilt.jpg
-    - images/pilt2.jpg
-    - images/pilt3.jpg
+    - assets/images/pilt.jpg
+    - assets/images/pilt2.jpg
+    - assets/images/pilt3.jpg
 
   fonts:
     - family: Montserrat
       fonts:
-        - asset: fonts/Montserrat-Regular.ttf
-        - asset: fonts/Montserrat-Bold.ttf
+        - asset: assets/fonts/Montserrat-Regular.ttf
+        - asset: assets/fonts/Montserrat-Bold.ttf
           weight: 700
-        - asset: fonts/Montserrat-SemiBold.ttf
+        - asset: assets/fonts/Montserrat-SemiBold.ttf
           weight: 600
-        - asset: fonts/Montserrat-Medium.ttf
+        - asset: assets/fonts/Montserrat-Medium.ttf
           weight: 500
     - family: Open Sans
       fonts:
-        - asset: fonts/OpenSans-Regular.ttf
-        - asset: fonts/OpenSans-Italic.ttf
+        - asset: assets/fonts/OpenSans-Regular.ttf
+        - asset: assets/fonts/OpenSans-Italic.ttf
           style: italic
-        - asset: fonts/OpenSans-Bold.ttf
+        - asset: assets/fonts/OpenSans-Bold.ttf
           weight: 700
     - family: Libre Franklin
       fonts: 
-        - asset: fonts/LibreFranklin-Bold.ttf
+        - asset: assets/fonts/LibreFranklin-Bold.ttf
           weight: 700
-        - asset: fonts/LibreFranklin-Light.ttf
+        - asset: assets/fonts/LibreFranklin-Light.ttf
           weight: 300
-        - asset: fonts/LibreFranklin-Medium.ttf
+        - asset: assets/fonts/LibreFranklin-Medium.ttf
           weight: 500
-        - asset: fonts/LibreFranklin-Regular.ttf
+        - asset: assets/fonts/LibreFranklin-Regular.ttf
     - family: Merriweather
       fonts:
-        - asset: fonts/Merriweather-BlackItalic.ttf
+        - asset: assets/fonts/Merriweather-BlackItalic.ttf
           weight: 800
           style: italic
-        - asset: fonts/Merriweather-BoldItalic.ttf
+        - asset: assets/fonts/Merriweather-BoldItalic.ttf
           weight: 700
           style: italic
-        - asset: fonts/Merriweather-Italic.ttf
+        - asset: assets/fonts/Merriweather-Italic.ttf
           style: italic
-        - asset: fonts/Merriweather-Regular.ttf
+        - asset: assets/fonts/Merriweather-Regular.ttf

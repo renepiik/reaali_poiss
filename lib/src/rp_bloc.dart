@@ -31,22 +31,28 @@ class RPBloc {
   var _frontpageArticles = <Article>[];
   Stream<UnmodifiableListView<Article>> get frontpageArticles => _frontpageSubject.stream;
 
-  // refresh frontpage sink
-  final _frontpageRefreshController = StreamController<bool>();
-  Sink<bool> get frontpageRefresh => _frontpageRefreshController.sink;
-
   // edition articles stream
   final _editionSubject = BehaviorSubject<UnmodifiableListView<Article>>();
   var _editionArticles = <Article>[];
   Stream<UnmodifiableListView<Article>> get editionArticles => _editionSubject.stream;
 
+  // refresh frontpage sink
+  final _frontpageRefreshController = StreamController<bool>();
+  Sink<bool> get frontpageRefresh => _frontpageRefreshController.sink;
+
   // edition id sink
   final _editionIdController = StreamController<int>();
   Sink<int> get editionId => _editionIdController.sink;
+
+  // theme sink
+  final _themeController = StreamController<bool>();
+  get darkThemeEnabled => _themeController.stream;
+  Sink<bool> get changeTheme => _themeController.sink;
   
   void dispose() { 
     _editionIdController.close();
     _frontpageRefreshController.close();
+    _themeController.close();
   }
 
   RPBloc() {
@@ -60,6 +66,7 @@ class RPBloc {
     }
 
     frontpage();
+
     _frontpageRefreshController.stream.listen((frontpageRefresh) {
       frontpage();
     });

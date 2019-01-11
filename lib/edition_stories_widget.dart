@@ -61,7 +61,7 @@ class EditionStoriesWidget extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
                 image: DecorationImage(
-                  image: AssetImage('images/pilt2.jpg'),
+                  image: AssetImage('assets/images/pilt2.jpg'),
                   fit: BoxFit.cover,
                 ),
               ),

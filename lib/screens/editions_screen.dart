@@ -20,6 +20,7 @@ class EditionsScreen extends StatelessWidget {
           SliverList(
             delegate: SliverChildListDelegate(
               <Widget>[
+                Container(height: 32,),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 28.0),
                   child: EditionWidget(editionMonth: 'Detsember', editionId: 157,),

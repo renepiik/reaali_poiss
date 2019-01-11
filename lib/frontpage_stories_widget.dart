@@ -15,9 +15,13 @@ class FrontpageStoriesWidget extends StatelessWidget {
       initialData: UnmodifiableListView<Article>([]),
       builder: (context, snapshot) {
         return Column(
-          children: snapshot.data
-              .map((article) => _storyWidget(context, article))
-              .toList(),
+          children: <Widget>[
+            Column(
+              children: snapshot.data
+                  .map((article) => _storyWidget(context, article))
+                  .toList(),
+            ),
+          ],
         );
       },
     );
@@ -55,7 +59,7 @@ class FrontpageStoriesWidget extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
                 image: DecorationImage(
-                  image: AssetImage('images/pilt2.jpg'),
+                  image: AssetImage('assets/images/pilt2.jpg'),
                   fit: BoxFit.cover,
                 ),
               ),

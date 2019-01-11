@@ -41,15 +41,14 @@ class EditionScreenState extends State<EditionScreen> {
                           image: AssetImage('images/pilt3.jpg'),
                           fit: BoxFit.cover,
                         ),
-                        color: Colors.grey[300],
-                        boxShadow: [
+                        /*boxShadow: [
                           BoxShadow(
                             spreadRadius: 5,
                             color: Colors.grey[400],
                             blurRadius: 15,
                             offset: Offset(5, 5),
                           )
-                        ],
+                        ],*/
                       ),
                     ),
                   ),

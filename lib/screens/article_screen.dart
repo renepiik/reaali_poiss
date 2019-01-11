@@ -40,7 +40,7 @@ class _ArticleScreenState extends State<ArticleScreen> {
             expandedHeight: 250.0,
             flexibleSpace: FlexibleSpaceBar(
               background: Image(
-                  image: AssetImage('images/pilt2.jpg'), fit: BoxFit.cover),
+                  image: AssetImage('assets/images/pilt2.jpg'), fit: BoxFit.cover),
             ),
             actions: <Widget>[
               IconButton(
