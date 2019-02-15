@@ -4,6 +4,7 @@ import 'dart:collection';
 import 'package:reaali_poiss/src/rp_bloc.dart';
 import 'package:reaali_poiss/styles.dart';
 import 'package:reaali_poiss/screens/article_screen.dart';
+import 'dart:math';
 
 class FrontpageStoriesWidget extends StatelessWidget {
   @override
@@ -15,19 +16,22 @@ class FrontpageStoriesWidget extends StatelessWidget {
       initialData: UnmodifiableListView<Article>([]),
       builder: (context, snapshot) {
         return Column(
-          children: <Widget>[
-            Column(
-              children: snapshot.data
-                  .map((article) => _storyWidget(context, article))
-                  .toList(),
-            ),
-          ],
+          children: snapshot.data
+              .map((article) => _storyWidget(context, article))
+              .toList(),
         );
       },
     );
   }
 
   Widget _storyWidget(BuildContext context, Article article) {
+    List<String> _images = [
+      'assets/images/pilt.jpg',
+      'assets/images/pilt2.jpg'
+    ];
+    Random r = Random();
+    int i = r.nextInt(_images.length);
+
     return Container(
       margin: EdgeInsets.symmetric(vertical: 8),
       child: InkWell(
@@ -52,14 +56,14 @@ class FrontpageStoriesWidget extends StatelessWidget {
               ),
             ),
             Container(
-              margin: EdgeInsets.fromLTRB(20, 8, 12, 8)
-                  .add(EdgeInsets.symmetric(vertical: 10, horizontal: 5)),
-              height: 85.0,
-              width: 85.0,
+              margin: EdgeInsets.fromLTRB(25, 0, 16, 0),
+              height: 95.0,
+              width: 95.0,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
+                //borderRadius: BorderRadius.circular(5),
+                color: Colors.grey[200],
                 image: DecorationImage(
-                  image: AssetImage('assets/images/pilt2.jpg'),
+                  image: AssetImage(_images[i]),
                   fit: BoxFit.cover,
                 ),
               ),

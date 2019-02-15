@@ -25,7 +25,7 @@ class EditionWidget extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(7),
               image: DecorationImage(
-                image: AssetImage('images/pilt3.jpg'),
+                image: AssetImage('assets/images/pilt3.jpg'),
                 fit: BoxFit.cover,
               ),
               color: Colors.grey[300],

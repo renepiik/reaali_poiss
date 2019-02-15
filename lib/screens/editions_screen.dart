@@ -6,17 +6,8 @@ class EditionsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScrollView(
+        physics: BouncingScrollPhysics(),
         slivers: <Widget>[
-          SliverAppBar(
-            title: Text('Vanemad lehed'),
-            pinned: true,
-            actions: <Widget>[
-              IconButton(
-                icon: Icon(Icons.search),
-                onPressed: () {},
-              ),
-            ],
-          ),
           SliverList(
             delegate: SliverChildListDelegate(
               <Widget>[
